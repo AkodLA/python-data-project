@@ -1,8 +1,8 @@
 from pathlib import Path
 
-def read_file(file): #i need to make it take a path but for now it will just take a file name (it's corrected now)
+def read_file(filepath): #i need to make it take a path but for now it will just take a file name (it's corrected now)
     path = Path(__file__) #makes the filepath object
-    path = path / file #adds the argument to the path object
+    path = path / filepath #adds the argument to the path object
     lines = path.open("r")
     dictionnary = {}
     titles = lines.readline() #reads the firstline that contains titles, not relevant data to have in datastructures
@@ -40,13 +40,20 @@ def find_best(dictionnary):
             best = f"Name: {id[0]}, Age: {id[1]}, Score: {maximum}"
     return best
     
+def find_worst(dictionnary):
+    last = min(dictionnary.values())
+    for id in dictionnary:
+        if dictionnary[id] == last:
+            worst = f"Name: {id[0]}, Age: {id[1]}, Score: {last}"           
+    return worst
 
 def main():
     dictionnary = read_file("c:/Users/akram/OneDrive/Dokumenter/Karriere/python-data-project/data/sample_data.csv")
     print(f"The register:\n{dictionnary}\n")
     print(f"The average score:\n{average_score(dictionnary)}\n")
     print(f"The best one:\n{find_best(dictionnary)}\n")
-    
+    print(f"The last one:\n{find_worst(dictionnary)}\n")
+
 
 if __name__ == "__main__":
     main()
