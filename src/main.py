@@ -47,6 +47,41 @@ def find_worst(dictionnary):
             worst = f"Name: {id[0]}, Age: {id[1]}, Score: {last}"           
     return worst
 
+#Day 3
+def score_filter(dictionnary, minscore):
+    filtered = {}
+    for person in dictionnary:
+        if dictionnary[person] >= minscore:
+            filtered[person] = dictionnary[person] #make another dictionnary containing filtered persons and their scores
+    return filtered
+
+def age_filter(dictionnary, maxage):
+    filtered = {}
+    for person in dictionnary:
+        if person[1] <= maxage:
+            filtered[person] = dictionnary[person]
+    return filtered
+
+def combinedfilter(dictionnary, minscore, maxage):
+    my_list = []
+    score_filtered = score_filter(dictionnary, minscore)
+    age_filtered = age_filter(dictionnary, maxage)
+    for person in dictionnary:
+        if person in score_filtered and person in age_filtered:
+            pers = f"Name: {person[0]}, Age: {person[1]}, Score: {dictionnary[person]}"
+            my_list.append(pers)
+    return my_list
+
+def third_day(dictionnary):
+    number_pers = f"There are {len(dictionnary)} person"
+    average = f"The average score is {average_score(dictionnary)}"
+    best = find_best(dictionnary)
+    print(number_pers)
+    print(average)
+    print(best)
+
+
+
 def main():
     dictionnary = read_file("c:/Users/akram/OneDrive/Dokumenter/Karriere/python-data-project/data/sample_data.csv")
     print(f"The register:\n{dictionnary}\n")
@@ -54,6 +89,7 @@ def main():
     print(f"The best one:\n{find_best(dictionnary)}\n")
     print(f"The last one:\n{find_worst(dictionnary)}\n")
 
+    third_day(dictionnary)
 
 if __name__ == "__main__":
     main()
