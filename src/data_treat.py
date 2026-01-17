@@ -2,6 +2,8 @@
 This file is for data treatment and analyse."""
 
 def average_score(dictionnary):
+    if not dictionnary: #To count the average score only if dictionnay is not empty -> len(dictionnary) = 0
+        return None
     total = 0
     num_pers = 0
     for tupple in dictionnary:
@@ -13,6 +15,8 @@ def average_score(dictionnary):
 
 #find_best and find_worst are repetitive, so i'll use find function as a help function to avoid repetition code
 def find(dictionnary, value):
+    if not dictionnary: #To find the person, i need data in the datastructure and it can't be a none data
+        return None
     for key in dictionnary:
         if dictionnary[key] == value:
             result = f"Name: {key[0]}, Age: {key[1]}, Score: {value}" #formate the returned value and return it
@@ -20,15 +24,16 @@ def find(dictionnary, value):
 
 
 def find_best(dictionnary):
-    maximum = 0
-    for score in dictionnary.values(): #find the highest score by going through all of the items
-        if maximum < score:
-            maximum = score
+    if not dictionnary:
+        return None
+    maximum = max(dictionnary.values()) #find the highest score by going through all of the items
     best = find(dictionnary, maximum)
     return best
     
 
 def find_worst(dictionnary):
+    if not dictionnary:
+        return None
     last = min(dictionnary.values())
     worst = find(dictionnary, last)         
     return worst
